@@ -14,39 +14,39 @@ export function FooterSection() {
 
   const socialLinks: SocialLink[] = [
     {
-      platform: "github",
-      url: "https://github.com/nathanael",
-      icon: "fab fa-github",
-      color: "hsl(var(--primary))",
-      handle: "@nathanael"
+      platform: "whatsapp",
+      url: "https://wa.me/message/6OOCUSNRJ34ZF1",
+      icon: "fab fa-whatsapp",
+      color: "#25D366",
+      handle: "Message Me"
     },
     {
-      platform: "linkedin",
-      url: "https://linkedin.com/in/nathanael",
-      icon: "fab fa-linkedin",
-      color: "hsl(var(--secondary))",
-      handle: "/nathanael"
+      platform: "facebook",
+      url: "https://www.facebook.com/WinathanBliss",
+      icon: "fab fa-facebook",
+      color: "#1877F2",
+      handle: "WinathanBliss"
+    },
+    {
+      platform: "github",
+      url: "https://github.com/TechNathan971",
+      icon: "fab fa-github",
+      color: "#333333",
+      handle: "TechNathan971"
     },
     {
       platform: "twitter",
-      url: "https://twitter.com/nathanael",
+      url: "https://x.com/winathan971?t=GN2mA57j3J5t6JTWakkfsw&s=09",
       icon: "fab fa-twitter",
-      color: "hsl(var(--accent))",
-      handle: "@nathanael_dev"
+      color: "#1DA1F2",
+      handle: "@winathan971"
     },
     {
-      platform: "email",
-      url: "mailto:nathanael@zenithtech.dev",
-      icon: "fas fa-envelope",
-      color: "hsl(var(--neon-pink))",
-      handle: "contact@zenith"
-    },
-    {
-      platform: "discord",
-      url: "https://discord.gg/nathanael",
-      icon: "fab fa-discord",
-      color: "hsl(var(--neon-purple))",
-      handle: "nathanael#dev"
+      platform: "linkedin",
+      url: "https://www.linkedin.com/in/nathanael-nwana-924928360?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      icon: "fab fa-linkedin",
+      color: "#0A66C2",
+      handle: "Nathanael Nwana"
     }
   ];
 

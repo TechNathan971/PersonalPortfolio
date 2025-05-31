@@ -168,6 +168,24 @@
     animation: gentle-flow 12s ease-in-out infinite;
   }
 
+  .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, 
+      #6366f1, 
+      #a855f7, 
+      #ec4899
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .console-cursor::after {
     content: '|';
     animation: blink 1s infinite;
