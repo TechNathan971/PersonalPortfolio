@@ -10,7 +10,7 @@ export function HeroSection() {
   const nameIndex = useRef(0);
   const hoverInterval = useRef<NodeJS.Timeout>();
 
-  const slogan = "code, thrive, conquer";
+  const slogan = "Building the Future";
 
   // Typewriter effect
   useEffect(() => {
@@ -22,14 +22,13 @@ export function HeroSection() {
       } else {
         clearInterval(timer);
       }
-    }, 150);
+    }, 100);
 
     return () => clearInterval(timer);
   }, []);
 
   const handleNameHover = () => {
     setNameHovered(true);
-    // Cycle through name variations
     hoverInterval.current = setInterval(() => {
       nameIndex.current = (nameIndex.current + 1) % nameVariants.length;
       setCurrentNameVariant(nameVariants[nameIndex.current]);
@@ -57,59 +56,104 @@ export function HeroSection() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex flex-col justify-center items-center relative px-6">
-      {/* Slogan with Typewriter Effect */}
+    <section id="home" className="min-h-screen flex flex-col justify-center items-center relative px-6 py-20">
+      {/* Modern Hero Content */}
       <motion.div 
-        className="text-center mb-12"
-        initial={{ opacity: 0, y: 50 }}
+        className="text-center max-w-4xl mx-auto"
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5 }}
+        transition={{ delay: 0.8 }}
       >
-        <h1 className="text-4xl md:text-6xl font-orbitron font-bold mb-4">
-          <span className="text-primary neon-glow">
-            {typewriterText}
-            <span className="typewriter-cursor" />
-          </span>
-        </h1>
-      </motion.div>
-
-      {/* Interactive Name Display */}
-      <motion.div 
-        className="text-center mb-8"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 2 }}
-      >
-        <button
-          onMouseEnter={handleNameHover}
-          onMouseLeave={handleNameLeave}
-          onClick={handleNameClick}
-          onDoubleClick={handleNameDoubleClick}
-          className="text-5xl md:text-7xl font-orbitron font-black relative cursor-pointer group focus:outline-none focus:ring-2 focus:ring-primary rounded-lg p-2"
-          aria-label="Nathanael, click for bio, double-click for about section"
+        <motion.h1 
+          className="text-5xl md:text-7xl font-orbitron font-bold mb-6 gradient-text leading-tight"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1 }}
         >
+          {typewriterText}
           <motion.span 
-            className="text-primary glitch-text neon-glow"
-            data-text={currentNameVariant}
-            animate={{ 
-              scale: nameHovered ? 1.1 : 1,
-              color: nameHovered && nameIndex.current % 2 === 1 ? "hsl(var(--neon-magenta))" : "hsl(var(--primary))"
+            className="inline-block w-1 h-16 md:h-20 bg-primary ml-2"
+            animate={{ opacity: [1, 0] }}
+            transition={{ duration: 1, repeat: Infinity }}
+          />
+        </motion.h1>
+        
+        <motion.p 
+          className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5 }}
+        >
+          Full-Stack Developer & AI Researcher
+        </motion.p>
+
+        {/* Interactive Name Display */}
+        <motion.div 
+          className="mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2 }}
+        >
+          <button
+            onMouseEnter={handleNameHover}
+            onMouseLeave={handleNameLeave}
+            onClick={handleNameClick}
+            onDoubleClick={handleNameDoubleClick}
+            className="text-4xl md:text-6xl font-orbitron font-bold text-gray-900 hover:text-primary transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg p-4"
+            aria-label="Nathanael, click for bio, double-click for about section"
+          >
+            <motion.span 
+              animate={{ 
+                scale: nameHovered ? 1.05 : 1,
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              {currentNameVariant}
+            </motion.span>
+            <motion.span 
+              animate={{ opacity: nameHovered ? 0.7 : 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              anael
+            </motion.span>
+          </button>
+        </motion.div>
+
+        {/* Call to Action */}
+        <motion.div 
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.5 }}
+        >
+          <motion.button
+            onClick={() => {
+              const projectsSection = document.getElementById('projects');
+              if (projectsSection) {
+                projectsSection.scrollIntoView({ behavior: 'smooth' });
+              }
             }}
-            transition={{ duration: 0.3 }}
+            className="px-8 py-4 bg-primary text-white rounded-xl font-medium hover:bg-primary/90 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {currentNameVariant}
-          </motion.span>
-          <motion.span 
-            className="text-secondary neon-glow"
-            animate={{ opacity: nameHovered ? 0.7 : 1 }}
-            transition={{ duration: 0.3 }}
-          >
-            anael
-          </motion.span>
+            View My Work
+          </motion.button>
           
-          {/* Background glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-secondary opacity-20 blur-lg group-hover:opacity-40 transition-opacity duration-300 rounded-lg" />
-        </button>
+          <motion.button
+            onClick={() => {
+              const contactSection = document.getElementById('contact');
+              if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-xl font-medium hover:border-primary hover:text-primary transition-all duration-300 hover:scale-105"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Get In Touch
+          </motion.button>
+        </motion.div>
       </motion.div>
 
       {/* Bio Panel */}

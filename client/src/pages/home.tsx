@@ -1,5 +1,5 @@
 import { StartupLoader } from "@/components/startup-loader";
-import { LiquidBackground } from "@/components/liquid-background";
+import { ModernBackground } from "@/components/liquid-background";
 import { Header } from "@/components/header";
 import { HeroSection } from "@/components/hero-section";
 import { AboutSection } from "@/components/about-section";
@@ -63,8 +63,8 @@ export default function Home() {
       {/* Startup Loading Sequence */}
       {isLoading && <StartupLoader onComplete={handleLoadingComplete} />}
 
-      {/* Liquid Background Canvas */}
-      <LiquidBackground />
+      {/* Modern Background Canvas */}
+      <ModernBackground />
 
       {/* Main Content */}
       <div className="relative z-10">
