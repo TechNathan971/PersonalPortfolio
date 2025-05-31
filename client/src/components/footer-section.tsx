@@ -98,189 +98,122 @@ export function FooterSection() {
 
   return (
     <footer id="contact" className="min-h-screen flex flex-col justify-center items-center px-6 py-20 relative">
-      <div className="w-full max-w-4xl mx-auto text-center">
+      <div className="w-full max-w-6xl mx-auto text-center">
         <motion.h2 
-          className="text-4xl md:text-5xl font-orbitron font-bold text-primary neon-glow mb-16"
+          className="text-4xl md:text-5xl font-orbitron font-bold gradient-text mb-16"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Connect
+          Let's Connect
         </motion.h2>
         
-        {/* 3D Base Station Platform */}
+        {/* Modern Social Links Grid */}
         <motion.div 
-          className="relative h-80 mb-16"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          className="grid grid-cols-2 md:grid-cols-5 gap-6 mb-16 max-w-2xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          {/* Central Core */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div 
-              className="w-24 h-24 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center"
-              animate={{ 
-                boxShadow: [
-                  "0 0 20px hsl(var(--primary))",
-                  "0 0 40px hsl(var(--secondary))",
-                  "0 0 20px hsl(var(--primary))"
-                ]
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
+          {socialLinks.map((link, index) => (
+            <motion.a
+              key={link.platform}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-card p-6 rounded-2xl flex flex-col items-center justify-center hover:shadow-xl transition-all duration-300 group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 + index * 0.1 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+              onHoverStart={() => setHoveredOrb(link.platform)}
+              onHoverEnd={() => setHoveredOrb(null)}
             >
-              <span className="text-2xl font-orbitron font-bold text-black">Z</span>
-            </motion.div>
-          </div>
-          
-          {/* Orbiting Social Icons */}
-          {socialLinks.map((link, index) => {
-            const angle = (index / socialLinks.length) * 360;
-            const delay = index * 2;
-            
-            return (
               <motion.div
-                key={link.platform}
-                className="absolute w-16 h-16 flex items-center justify-center"
-                style={{
-                  left: '50%',
-                  top: '50%',
-                  transformOrigin: '50% 50%',
-                }}
-                animate={{
-                  rotate: [0, 360],
-                  x: [
-                    Math.cos((angle * Math.PI) / 180) * 120 - 32,
-                    Math.cos(((angle + 360) * Math.PI) / 180) * 120 - 32
-                  ],
-                  y: [
-                    Math.sin((angle * Math.PI) / 180) * 120 - 32,
-                    Math.sin(((angle + 360) * Math.PI) / 180) * 120 - 32
-                  ]
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear",
-                  delay: delay
+                className="w-12 h-12 rounded-xl flex items-center justify-center mb-3 transition-colors duration-300"
+                style={{ 
+                  backgroundColor: hoveredOrb === link.platform ? link.color : '#f3f4f6',
+                  color: hoveredOrb === link.platform ? 'white' : link.color
                 }}
               >
-                <motion.button
-                  className="w-full h-full bg-card/80 backdrop-blur-lg rounded-full flex items-center justify-center group relative overflow-hidden"
-                  style={{ borderColor: link.color }}
-                  whileHover={{ 
-                    scale: 1.2,
-                    backgroundColor: link.color.replace(')', ', 0.2)').replace('hsl(', 'hsla('),
-                  }}
-                  onHoverStart={() => setHoveredOrb(link.platform)}
-                  onHoverEnd={() => setHoveredOrb(null)}
-                  onClick={() => handleSocialClick(link)}
-                  aria-label={`Visit ${link.platform} profile: ${link.handle}`}
-                >
-                  <motion.i 
-                    className={`${link.icon} text-xl text-white group-hover:text-black transition-colors`}
-                    style={{ color: hoveredOrb === link.platform ? link.color : undefined }}
-                    animate={{
-                      scale: hoveredOrb === link.platform ? [1, 1.2, 1] : 1
-                    }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  
-                  {/* Neon connector line */}
-                  <motion.div
-                    className="absolute w-20 h-0.5 bg-current opacity-0 group-hover:opacity-100 transition-opacity"
-                    style={{ 
-                      backgroundColor: link.color,
-                      transformOrigin: '0 50%',
-                      transform: `rotate(${-angle}deg)`,
-                      left: '50%',
-                      top: '50%'
-                    }}
-                    initial={{ scaleX: 0 }}
-                    animate={{ 
-                      scaleX: hoveredOrb === link.platform ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.3 }}
-                  />
-                  
-                  {/* Handle label */}
-                  <motion.div
-                    className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs font-mono whitespace-nowrap"
-                    style={{ color: link.color }}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ 
-                      opacity: hoveredOrb === link.platform ? 1 : 0,
-                      y: hoveredOrb === link.platform ? 0 : 10
-                    }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {link.handle}
-                  </motion.div>
-                </motion.button>
+                <i className={`${link.icon} text-2xl`} />
               </motion.div>
-            );
-          })}
+              
+              <h4 className="font-medium text-gray-900 mb-1 capitalize">{link.platform}</h4>
+              <p className="text-sm text-gray-600 text-center leading-tight">{link.handle}</p>
+            </motion.a>
+          ))}
         </motion.div>
         
-        {/* Neon Ticker */}
+        {/* Contact Cards */}
         <motion.div 
-          className="overflow-hidden mb-8"
+          className="grid md:grid-cols-3 gap-6 mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.8 }}
         >
-          <motion.div className="holo-card p-4">
-            <motion.p 
-              className="text-sm font-mono text-primary neon-glow"
-              initial={{ width: 0 }}
-              whileInView={{ width: "100%" }}
-              viewport={{ once: true }}
-              transition={{ delay: 1, duration: 3 }}
-              style={{ overflow: 'hidden', whiteSpace: 'nowrap' }}
-            >
-              © 2025 Nathanael | Built with Three.js, GSAP, React, and love 💙
-            </motion.p>
+          <motion.div 
+            className="glass-card p-6 rounded-2xl text-center"
+            whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#3b82f6"/>
+                <circle cx="12" cy="9" r="2.5" fill="white"/>
+              </svg>
+            </div>
+            <h4 className="font-orbitron font-bold mb-2 text-gray-900">Location</h4>
+            <p className="text-gray-600">Global Remote</p>
+          </motion.div>
+          
+          <motion.div 
+            className="glass-card p-6 rounded-2xl text-center"
+            whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" fill="#10b981"/>
+                <polyline points="12,6 12,12 16,14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <h4 className="font-orbitron font-bold mb-2 text-gray-900">Availability</h4>
+            <p className="text-gray-600">Open to Opportunities</p>
+          </motion.div>
+          
+          <motion.div 
+            className="glass-card p-6 rounded-2xl text-center"
+            whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" fill="#8b5cf6"/>
+                <circle cx="12" cy="11" r="1" fill="white"/>
+                <circle cx="8" cy="11" r="1" fill="white"/>
+                <circle cx="16" cy="11" r="1" fill="white"/>
+              </svg>
+            </div>
+            <h4 className="font-orbitron font-bold mb-2 text-gray-900">Let's Chat</h4>
+            <p className="text-gray-600">Always up for collaboration</p>
           </motion.div>
         </motion.div>
 
-        {/* Additional Contact Info */}
+        {/* Footer Copyright */}
         <motion.div 
-          className="grid md:grid-cols-3 gap-6 text-center"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="border-t border-gray-200 pt-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 1 }}
         >
-          <motion.div 
-            className="holo-card p-4"
-            whileHover={{ scale: 1.05, y: -5 }}
-            transition={{ duration: 0.3 }}
-          >
-            <i className="fas fa-map-marker-alt text-2xl text-primary mb-2" />
-            <h4 className="font-orbitron font-bold mb-1">Location</h4>
-            <p className="text-sm text-muted-foreground">Global Remote</p>
-          </motion.div>
-          
-          <motion.div 
-            className="holo-card p-4"
-            whileHover={{ scale: 1.05, y: -5 }}
-            transition={{ duration: 0.3 }}
-          >
-            <i className="fas fa-clock text-2xl text-secondary mb-2" />
-            <h4 className="font-orbitron font-bold mb-1">Availability</h4>
-            <p className="text-sm text-muted-foreground">Open to Opportunities</p>
-          </motion.div>
-          
-          <motion.div 
-            className="holo-card p-4"
-            whileHover={{ scale: 1.05, y: -5 }}
-            transition={{ duration: 0.3 }}
-          >
-            <i className="fas fa-coffee text-2xl text-accent mb-2" />
-            <h4 className="font-orbitron font-bold mb-1">Let's Chat</h4>
-            <p className="text-sm text-muted-foreground">Always up for collaboration</p>
-          </motion.div>
+          <p className="text-gray-600 text-center">
+            © 2025 Nathanael Nwana. Built with React, Three.js, and modern web technologies.
+          </p>
         </motion.div>
       </div>
     </footer>

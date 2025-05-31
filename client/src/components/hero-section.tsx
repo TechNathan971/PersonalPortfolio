@@ -32,7 +32,7 @@ export function HeroSection() {
     hoverInterval.current = setInterval(() => {
       nameIndex.current = (nameIndex.current + 1) % nameVariants.length;
       setCurrentNameVariant(nameVariants[nameIndex.current]);
-    }, 500);
+    }, 800);
   };
 
   const handleNameLeave = () => {
@@ -40,8 +40,10 @@ export function HeroSection() {
     if (hoverInterval.current) {
       clearInterval(hoverInterval.current);
     }
-    setCurrentNameVariant("Nath");
-    nameIndex.current = 0;
+    setTimeout(() => {
+      setCurrentNameVariant("Nath");
+      nameIndex.current = 0;
+    }, 100);
   };
 
   const handleNameClick = () => {
@@ -160,55 +162,65 @@ export function HeroSection() {
       <AnimatePresence>
         {bioOpen && (
           <motion.div
-            className="fixed inset-y-0 right-0 w-96 max-w-full bg-card/90 backdrop-blur-lg holo-card p-8 z-30"
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="fixed inset-0 bg-white/95 backdrop-blur-xl flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setBioOpen(false)}
           >
-            <button
-              onClick={() => setBioOpen(false)}
-              className="absolute top-4 right-4 text-white hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary"
-              aria-label="Close bio panel"
+            <motion.div
+              className="glass-card rounded-2xl p-8 max-w-2xl mx-4 shadow-2xl"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
             >
-              <i className="fas fa-times" />
-            </button>
-            
-            <div className="mt-8">
-              {/* 3D Avatar placeholder */}
-              <motion.div 
-                className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center"
-                animate={{ rotateY: [0, 360] }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              <button
+                onClick={() => setBioOpen(false)}
+                className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 rounded-lg p-2"
+                aria-label="Close bio panel"
               >
-                <div className="w-20 h-20 bg-card rounded-full flex items-center justify-center">
-                  <i className="fas fa-user text-2xl text-primary" />
-                </div>
-              </motion.div>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 6l12 12M6 18L18 6"/>
+                </svg>
+              </button>
               
-              <h3 className="text-xl font-orbitron font-bold text-primary mb-4 text-center">Nathanael</h3>
-              <p className="text-muted-foreground mb-4">
-                PhD-in-progress candidate specializing in advanced web technologies and interactive systems.
-              </p>
-              <p className="text-muted-foreground">
-                Full-stack developer with expertise in React, Three.js, GSAP, and modern web architecture.
-              </p>
-              
-              <div className="mt-6 space-y-2">
-                <div className="flex items-center space-x-3">
-                  <i className="fas fa-graduation-cap text-primary" />
-                  <span>PhD in Progress</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <i className="fas fa-code text-secondary" />
-                  <span>Full-Stack Developer</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <i className="fas fa-cube text-accent" />
-                  <span>3D Web Specialist</span>
+              <div className="mt-4">
+                <motion.div 
+                  className="w-20 h-20 mx-auto mb-6 gradient-text rounded-full flex items-center justify-center text-4xl font-orbitron font-bold border-2 border-gray-200"
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                >
+                  N
+                </motion.div>
+                
+                <h3 className="text-3xl font-orbitron font-bold gradient-text mb-6 text-center">About Nathanael</h3>
+                
+                <div className="space-y-4 text-gray-600">
+                  <p>
+                    <strong className="text-gray-900">Full Name:</strong> Nathanael Nwana
+                  </p>
+                  <p>
+                    <strong className="text-gray-900">Education:</strong> Computer Engineering Degree Student
+                  </p>
+                  <p>
+                    <strong className="text-gray-900">Role:</strong> Full-Stack Developer & AI Researcher
+                  </p>
+                  <p>
+                    <strong className="text-gray-900">Location:</strong> Global Remote
+                  </p>
+                  <p>
+                    <strong className="text-gray-900">Specialties:</strong> Modern Web Development, AI Integration, User Experience Design, WebGL/Three.js
+                  </p>
+                  <p>
+                    <strong className="text-gray-900">Mission:</strong> Creating innovative digital solutions that bridge technology and human experience, with a focus on clean, efficient, and impactful design.
+                  </p>
+                  <p>
+                    <strong className="text-gray-900">Current Focus:</strong> Building next-generation web applications with advanced 3D graphics, AI-powered features, and seamless user interactions.
+                  </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
